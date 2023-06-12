@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.tipcalculator
 
 import android.os.Bundle
@@ -7,11 +9,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+// opt-in api change
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,6 +57,11 @@ fun TipCalculatorLayout() {
                 .padding(bottom = 16.dp)
                 .align(alignment = Alignment.Start)
         )
+        EditNumberField(
+            modifier = Modifier
+                .padding(bottom = 32.dp)
+                .fillMaxWidth(),
+        )
         Text(
             text = stringResource(R.string.tip_amount, "$0.00"),
             style = MaterialTheme.typography.displaySmall
@@ -75,4 +86,13 @@ fun TipTimeLayoutPreview() {
     TipCalculatorTheme {
         TipCalculatorLayout()
     }
+}
+
+@Composable
+fun EditNumberField(modifier: Modifier = Modifier) {
+    TextField(
+        value = "",
+        onValueChange = {},
+        modifier = modifier
+    )
 }
