@@ -5,6 +5,7 @@ package com.example.tipcalculator
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
@@ -41,6 +43,7 @@ import java.text.NumberFormat
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 
@@ -97,6 +100,7 @@ fun TipCalculatorLayout() {
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Next
             ),
+            leadingIcon = R.drawable.money,
             modifier = Modifier
                 .padding(bottom = 32.dp)
                 .fillMaxWidth(),
@@ -112,7 +116,7 @@ fun TipCalculatorLayout() {
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
             ),
-
+            leadingIcon = R.drawable.percent,
             modifier = Modifier
                 .padding(bottom = 32.dp)
                 .fillMaxWidth(),
@@ -164,6 +168,7 @@ fun EditNumberField(
     // @StringRes annotation is a type-safe way to use string resources. It indicates that the
     // integer to be passed is a string resource from the values/strings.xml file.
     @StringRes label: Int,
+    @DrawableRes leadingIcon: Int,
     value: String,
     onValueChange: (String) -> Unit,
     keyboardOptions: KeyboardOptions,
@@ -176,7 +181,8 @@ fun EditNumberField(
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
         keyboardOptions = keyboardOptions,
-    )
+        leadingIcon = { Icon(painter = painterResource(id = leadingIcon), null) },
+        )
 }
 
 @Composable
